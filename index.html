@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dana — Product Designer, Data Visualization</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#0a0a0c',
+          surface: '#131318',
+          surface2: '#191921',
+          line: '#26262f',
+          mute: '#8d8d99',
+          paper: '#f1f1ef',
+          blue: '#4f8cff',
+          amber: '#e8a23d',
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body: ['Inter', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  html{ scroll-behavior:smooth; }
+  body{ background:#0a0a0c; }
+  .view{ display:none; }
+  .view.active{ display:block; }
+  ::selection{ background:#4f8cff; color:#0a0a0c; }
+  .ledger-num{ font-variant-numeric: tabular-nums; }
+  .grain{
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.035) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+  .glow{
+    background: radial-gradient(60% 50% at 50% 0%, rgba(79,140,255,0.16), transparent 70%);
+  }
+  .flow-line{ background: linear-gradient(90deg, transparent, #26262f 20%, #26262f 80%, transparent); height:1px; }
+  .card-hover{ transition: border-color .25s, transform .25s, background .25s; }
+  .card-hover:hover{ border-color:#4f8cff55; transform: translateY(-3px); background:#191921; }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body class="bg-ink text-paper font-body antialiased">
+
+<!-- NAV -->
+<header class="sticky top-0 z-50 backdrop-blur bg-ink/85 border-b border-line">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+    <button onclick="showView('home')" class="font-display font-semibold text-lg tracking-tight flex items-center gap-2">
+      <span class="text-blue"><i class="fa-solid fa-chart-network"></i></span> Dana
+    </button>
+    <nav class="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest text-mute">
+      <button onclick="showView('home','work')" class="hover:text-paper transition">Work</button>
+      <button onclick="showView('home','process')" class="hover:text-paper transition">Process</button>
+      <button onclick="showView('home','about')" class="hover:text-paper transition">About</button>
+      <button onclick="showView('home','contact')" class="px-4 py-2 rounded-full border border-line text-paper hover:border-blue hover:text-blue transition">Contact</button>
+    </nav>
+    <button onclick="showView('home','contact')" class="md:hidden text-mute"><i class="fa-solid fa-envelope"></i></button>
+  </div>
+</header>
+
+<!-- ============ HOME ============ -->
+<main id="view-home" class="view active">
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden border-b border-line grain">
+    <div class="absolute inset-0 glow pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-6 md:px-10 pt-20 pb-24 md:pt-28 md:pb-32 relative">
+      <div class="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-blue mb-8">
+        <span class="w-6 h-px bg-blue"></span> Product Designer · Data Visualization · 17yrs
+      </div>
+      <h1 class="font-display font-medium text-[12vw] leading-[0.95] md:text-7xl lg:text-8xl tracking-tight mb-10 max-w-4xl">
+        설계 안에는<br><span class="text-mute">우연이 없습니다.</span>
+      </h1>
+      <p class="text-lg md:text-xl text-mute max-w-xl leading-relaxed mb-14">
+        Dana는 리서치부터 측정 가능한 결과까지, 전체 의사결정 과정을 설계하는 프로덕트 디자이너입니다. 화면 너머에 있는 사용자의 판단 속도를 설계합니다.
+      </p>
+
+      <!-- Ledger -->
+      <div class="grid grid-cols-2 md:grid-cols-4 border-t border-line">
+        <div class="border-r border-line py-6 pr-6">
+          <div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">Years</div>
+          <div class="font-display text-3xl md:text-4xl ledger-num">17</div>
+        </div>
+        <div class="md:border-r border-line py-6 md:px-6">
+          <div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">Shipped Case Studies</div>
+          <div class="font-display text-3xl md:text-4xl ledger-num">5</div>
+        </div>
+        <div class="border-r border-line py-6 pr-6 mt-6 md:mt-0">
+          <div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">Avg. Decision Speed Gain</div>
+          <div class="font-display text-3xl md:text-4xl ledger-num text-blue">−63%</div>
+        </div>
+        <div class="py-6 md:px-6 mt-6 md:mt-0">
+          <div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">Status</div>
+          <div class="font-display text-3xl md:text-4xl">탐색 중</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS STRIP -->
+  <section id="process" class="border-b border-line">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-20">
+      <div class="flex items-end justify-between flex-wrap gap-6 mb-14">
+        <h2 class="font-display text-3xl md:text-4xl">작업 방식</h2>
+        <p class="font-mono text-xs text-mute max-w-sm text-right leading-relaxed">모든 케이스 스터디는 같은 5단계 구조로 기록됩니다 — 발견한 문제, 검증한 가설, 측정한 결과.</p>
+      </div>
+      <div class="grid md:grid-cols-5 gap-px bg-line border border-line">
+        <div class="bg-ink p-7">
+          <i class="fa-solid fa-magnifying-glass-chart text-blue text-xl mb-5"></i>
+          <div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">01 Discover</div>
+          <p class="text-sm text-mute leading-relaxed">현장 관찰과 인터뷰로 실제 사용 맥락을 기록합니다.</p>
+        </div>
+        <div class="bg-ink p-7">
+          <i class="fa-solid fa-users text-blue text-xl mb-5"></i>
+          <div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">02 Define</div>
+          <p class="text-sm text-mute leading-relaxed">문제를 측정 가능한 지표와 가설로 좁힙니다.</p>
+        </div>
+        <div class="bg-ink p-7">
+          <i class="fa-solid fa-diagram-project text-blue text-xl mb-5"></i>
+          <div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">03 Structure</div>
+          <p class="text-sm text-mute leading-relaxed">정보 위계와 흐름을 먼저 설계한 뒤 화면을 그립니다.</p>
+        </div>
+        <div class="bg-ink p-7">
+          <i class="fa-solid fa-flask text-blue text-xl mb-5"></i>
+          <div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">04 Validate</div>
+          <p class="text-sm text-mute leading-relaxed">실사용자와 함께 검증하고 가설을 다시 조정합니다.</p>
+        </div>
+        <div class="bg-ink p-7">
+          <i class="fa-solid fa-chart-line text-blue text-xl mb-5"></i>
+          <div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">05 Measure</div>
+          <p class="text-sm text-mute leading-relaxed">출시 후 수치로 가설이 맞았는지 확인합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK GRID -->
+  <section id="work" class="border-b border-line">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-20">
+      <div class="flex items-end justify-between flex-wrap gap-6 mb-14">
+        <h2 class="font-display text-3xl md:text-4xl">Selected Case Studies</h2>
+        <p class="font-mono text-xs text-mute max-w-sm text-right leading-relaxed">난이도 지표는 데이터 복잡도 × 의사결정 영향 범위를 기준으로 합니다.</p>
+      </div>
+      <div id="projectGrid" class="grid md:grid-cols-2 gap-px bg-line border border-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="border-b border-line">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-20 grid md:grid-cols-12 gap-12">
+      <div class="md:col-span-7">
+        <div class="font-mono text-xs text-blue uppercase tracking-widest mb-6">About</div>
+        <p class="font-display text-2xl md:text-3xl leading-snug mb-8 text-paper">
+          "좋은 시각화는 데이터를 예쁘게 그리는 일이 아니라, 보는 사람이 더 빠르고 정확하게 판단하도록 돕는 일입니다."
+        </p>
+        <p class="text-mute leading-relaxed mb-5">17년째 금융, 헬스케어, B2B SaaS 영역에서 대시보드와 모니터링 화면을 설계해왔습니다. 디자이너와 데이터 엔지니어 사이에서 "이 숫자가 무엇을 의미하는가"를 끝까지 따라가는 역할을 맡아왔습니다.</p>
+        <p class="text-mute leading-relaxed">지금은 복잡한 멀티 변수 데이터를 비전문가도 한눈에 읽을 수 있도록 단순화하는 작업, 그리고 그 과정을 처음부터 함께 설계할 팀을 찾고 있습니다.</p>
+      </div>
+      <div class="md:col-span-5">
+        <div class="border border-line divide-y divide-line">
+          <div class="flex justify-between items-center px-5 py-4 font-mono text-sm"><span class="text-mute">Data Visualization</span><span>17 yrs</span></div>
+          <div class="flex justify-between items-center px-5 py-4 font-mono text-sm"><span class="text-mute">Dashboard / Reporting UX</span><span>14 yrs</span></div>
+          <div class="flex justify-between items-center px-5 py-4 font-mono text-sm"><span class="text-mute">Design Systems</span><span>10 yrs</span></div>
+          <div class="flex justify-between items-center px-5 py-4 font-mono text-sm"><span class="text-mute">User Research</span><span>Daily</span></div>
+          <div class="flex justify-between items-center px-5 py-4 font-mono text-sm"><span class="text-mute">Figma · Framer · D3.js</span><span>Tools</span></div>
+          <div class="flex justify-between items-center px-5 py-4 font-mono text-sm"><span class="text-mute">Domain</span><span>핀테크 · 헬스케어 · SaaS</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-24 flex flex-wrap items-end justify-between gap-10">
+      <h2 class="font-display text-3xl md:text-5xl max-w-xl leading-tight">같이 풀어볼 다음 데이터 문제가<br>있으신가요.</h2>
+      <div class="flex flex-col items-end gap-4 font-mono text-sm">
+        <a href="mailto:dana.design@example.com" class="flex items-center gap-2 hover:text-blue transition"><i class="fa-solid fa-envelope"></i> dana.design@example.com</a>
+        <a href="#" class="flex items-center gap-2 hover:text-blue transition"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="#" class="flex items-center gap-2 hover:text-blue transition"><i class="fa-solid fa-file-arrow-down"></i> 이력서 다운로드</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-line">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-6 flex justify-between font-mono text-[11px] text-mute uppercase tracking-widest">
+      <span>© 2026 Dana</span>
+      <span>Not by Chance, by Design.</span>
+    </div>
+  </footer>
+</main>
+
+<!-- ============ DETAIL ============ -->
+<main id="view-detail" class="view">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 pt-8">
+    <button onclick="showView('home','work')" class="font-mono text-xs uppercase tracking-widest text-mute hover:text-blue transition flex items-center gap-2">
+      <i class="fa-solid fa-arrow-left"></i> Work
+    </button>
+  </div>
+  <div id="detailContent"></div>
+</main>
+
+<script>
+const PROJECTS = [
+  {
+    id:'liquidity-pulse',
+    score:'복잡도 0.8 · 영향 0.9',
+    title:'Liquidity Pulse',
+    client:'핀테크 스타트업',
+    sub:'트레이딩 데스크 대시보드',
+    year:'2024', role:'리드 프로덕트 디자이너', duration:'7개월',
+    metricBefore:'8.2초', metricAfter:'2.1초', metricLabel:'이상 신호 인지 시간',
+    icon:'fa-arrow-trend-up',
+    overview:'초당 수천 건씩 갱신되는 거래 데이터를, 트레이더가 0.5초 안에 읽고 판단할 수 있는 화면으로 재설계한 프로젝트입니다.',
+    problem:'기존 화면은 모든 지표를 동일한 시각적 무게로 나열했습니다. 그 결과 정작 중요한 이상 신호가 다른 정보 사이에 묻혀, 트레이더가 위험을 인지하는 데 평균 8.2초가 걸렸습니다.',
+    research:[
+      {label:'그림자 관찰', detail:'5명의 트레이더를 1교대씩 따라다니며 실제로 먼저 보는 숫자와 무시하는 숫자를 기록'},
+      {label:'페인 포인트', detail:'"화면을 보고 있어도 지금 뭐가 위험한지 바로 알 수 없다"는 응답이 5명 중 5명 공통'},
+      {label:'가설', detail:'변화율이 큰 지표일수록 시각적 우선순위가 자동으로 높아지면 인지 속도가 빨라질 것'}
+    ],
+    structure:'정보 위계를 다시 짜고, 변화율 기반으로 카드 크기·채도·위치가 자동 조정되는 "긴장도 기반" 레이아웃 시스템을 설계했습니다. 평소엔 조용하다가, 이상 신호가 생기면 해당 카드만 확대·강조됩니다.',
+    flow:['실시간 데이터 수신','변화율 계산','긴장도 점수화','레이아웃 자동 재배치','트레이더 인지'],
+    validate:'프로토타입을 실제 트레이딩 데스크에 1주일 배포해 클릭 로그와 음성 인터뷰로 검증했습니다. 초기 버전은 강조가 너무 잦아 "긴급함 피로"를 유발해, 임계값을 2차 조정했습니다.',
+    outcome:'이상 신호 인지 시간이 8.2초에서 2.1초로 단축되었고, 트레이더 만족도 설문에서 9점 만점에 8.4점을 기록했습니다.',
+    tags:['실시간 데이터','금융','대시보드']
+  },
+  {
+    id:'cohort-lens',
+    score:'복잡도 0.6 · 영향 0.7',
+    title:'Cohort Lens',
+    client:'B2B SaaS',
+    sub:'셀프서비스 코호트 분석 도구',
+    year:'2023', role:'시니어 프로덕트 디자이너', duration:'5개월',
+    metricBefore:'12%', metricAfter:'41%', metricLabel:'비기술 직군 기능 사용률',
+    icon:'fa-users-gear',
+    overview:'SQL을 모르는 마케터도 직접 코호트를 만들고 비교할 수 있는 셀프서비스 분석 도구를 설계했습니다.',
+    problem:'코호트 분석 기능은 강력했지만 SQL을 다룰 줄 아는 직원만 사용하고 있었습니다. 회사는 이 기능을 전사로 확산시키고 싶어했습니다.',
+    research:[
+      {label:'사용자 인터뷰', detail:'마케터 8명 대상, "필터 조합"이라는 개념 자체를 어려워한다는 점을 확인'},
+      {label:'태스크 분석', detail:'기존 SQL 사용자들이 실제로 쓰는 조건 패턴 23개 수집 및 빈도 분석'},
+      {label:'가설', detail:'필터를 문장처럼 읽히게 만들면 비기술 사용자도 스스로 구성할 수 있을 것'}
+    ],
+    structure:'복잡한 필터 조합을 문장형 조건 빌더로 바꾸고, 결과를 즉시 미리보기 차트로 반영했습니다. 표본 수가 너무 적은 코호트는 화면이 먼저 경고하도록 설계했습니다.',
+    flow:['조건 문장 구성','표본 크기 검증','즉시 미리보기','코호트 저장','팀 공유'],
+    validate:'베타 그룹 20명에게 2주간 배포 후 사용 로그 분석. 초기에는 경고 문구가 너무 기술적이어서 다시 쉬운 표현으로 수정했습니다.',
+    outcome:'비기술 직군의 기능 사용률이 3개월 만에 12%에서 41%로 상승했고, 데이터팀으로 가는 분석 요청이 절반 이하로 줄었습니다.',
+    tags:['SaaS','셀프서비스','데이터 리터러시']
+  },
+  {
+    id:'vital-grid',
+    score:'복잡도 0.9 · 영향 0.6',
+    title:'Vital Grid',
+    client:'헬스케어 스타트업',
+    sub:'병동 모니터링 시스템',
+    year:'2022', role:'프로덕트 디자이너', duration:'9개월',
+    metricBefore:'12회', metricAfter:'1회', metricLabel:'환자당 화면 전환 횟수',
+    icon:'fa-heart-pulse',
+    overview:'간호사가 한 화면에서 여러 환자의 생체 신호를 동시에 모니터링할 수 있는 병동용 대시보드를 설계했습니다.',
+    problem:'환자 1명당 화면 1개로 구성된 기존 시스템은, 간호사가 12명을 담당할 때 화면을 12번 넘겨야 했습니다. 위급 상황을 놓칠 위험이 컸습니다.',
+    research:[
+      {label:'야간 근무 동행', detail:'3주간 야간 교대 간호사와 함께 근무하며 시선 이동과 알림 반응 기록'},
+      {label:'접근성 검토', detail:'색각 이상 보유 인력 비율 확인, 색상만으로 위험도를 구분하는 기존 UI의 한계 발견'},
+      {label:'가설', detail:'위험 신호를 형태·패턴으로도 구분하면, 화면 전환 없이 다인실을 모니터링할 수 있을 것'}
+    ],
+    structure:'12명의 환자를 한 그리드에 배치하고, 위험도를 색상뿐 아니라 테두리 패턴과 깜빡임 빈도로도 표현했습니다. 위급 환자는 그리드 내에서 자동으로 확대됩니다.',
+    flow:['생체 신호 수신','위험도 점수화','다중 채널 인코딩','그리드 내 자동 확대','간호사 대응'],
+    validate:'실제 병동 2곳에서 시뮬레이션 테스트 진행, 색각 이상 간호사 포함 검증단 구성.',
+    outcome:'환자당 화면 전환 횟수가 12회에서 1회로 줄었고, 위급 신호 인지 시간이 평균 35% 단축되어 병원 3곳에 추가 도입되었습니다.',
+    tags:['헬스케어','접근성','모니터링']
+  },
+  {
+    id:'spend-atlas',
+    score:'복잡도 0.4 · 영향 0.85',
+    title:'Spend Atlas',
+    client:'엔터프라이즈',
+    sub:'사내 예산 리포팅 도구',
+    year:'2021', role:'프로덕트 디자이너', duration:'6개월',
+    metricBefore:'6시간', metricAfter:'40분', metricLabel:'분기 리포트 작성 시간',
+    icon:'fa-coins',
+    overview:'12개 부서의 예산 집행 현황을 한눈에 비교할 수 있는 경영진용 리포팅 화면을 설계했습니다.',
+    problem:'기존 리포트는 엑셀로 매주 수동 취합되었고, 부서마다 집계 기준이 달라 숫자를 신뢰하기 어려웠습니다.',
+    research:[
+      {label:'부서별 인터뷰', detail:'12개 부서 담당자 인터뷰로 예산 정의 불일치 항목 7개 발견'},
+      {label:'경영진 관찰', detail:'경영진이 보고서를 받으면 가장 먼저 찾는 질문이 "어디서 초과했는가"임을 확인'},
+      {label:'가설', detail:'단일 시각 언어로 표준화하면 부서 간 비교와 신뢰가 동시에 회복될 것'}
+    ],
+    structure:'예산 정의 표준화 워크숍을 먼저 진행한 뒤, 모든 부서가 같은 축과 색상 규칙을 쓰는 비교 화면을 설계했습니다. "초과 부서"를 최상단에 자동 배치했습니다.',
+    flow:['부서별 데이터 표준화','공통 축 정렬','초과 항목 자동 정렬','경영진 화면 노출','의사결정'],
+    validate:'경영진 5명 대상 워크스루 진행, 1차 버전은 정보량이 많아 핵심 화면을 별도 분리했습니다.',
+    outcome:'분기 리포트 작성 시간이 부서당 평균 6시간에서 40분으로 줄었습니다.',
+    tags:['엔터프라이즈','리포팅','표준화']
+  },
+  {
+    id:'signal-map',
+    score:'복잡도 0.7 · 영향 0.4',
+    title:'Signal Map',
+    client:'통신사',
+    sub:'네트워크 품질 모니터링',
+    year:'2020', role:'프로덕트 디자이너', duration:'4개월',
+    metricBefore:'평균 48분', metricAfter:'평균 22분', metricLabel:'장애 의심 지역 탐지 시간',
+    icon:'fa-tower-broadcast',
+    overview:'전국 기지국의 품질 데이터를 지도 위에서 탐색할 수 있는 내부 운영 도구를 설계했습니다.',
+    problem:'엔지니어들은 좌표 테이블을 직접 읽으며 문제 지역을 찾고 있었고, 지역 간 비교가 거의 불가능했습니다.',
+    research:[
+      {label:'필드 인터뷰', detail:'엔지니어 6명과 함께 실제 장애 대응 과정을 따라가며 의사결정 지점 기록'},
+      {label:'데이터 분석', detail:'절대값보다 인접 기지국 대비 편차가 실제 장애와 더 강하게 상관됨을 확인'},
+      {label:'가설', detail:'편차 기반 지도 시각화가 절대값 테이블보다 빠른 탐지로 이어질 것'}
+    ],
+    structure:'인접 기지국 대비 편차를 색상으로 표현하는 지도 기반 시각화를 설계해, 이상 지역이 지도 위에서 바로 도드라지도록 만들었습니다.',
+    flow:['기지국 데이터 수집','인접 편차 계산','지도 위 색상 매핑','이상 지역 강조','현장 대응'],
+    validate:'엔지니어 6명 대상 2주 파일럿, 색상 단계가 너무 세분화되어 5단계로 축소 조정했습니다.',
+    outcome:'장애 의심 지역 탐지 시간이 평균 절반으로 줄었고, 이후 사내 표준 모니터링 도구로 채택되었습니다.',
+    tags:['지리 공간 데이터','네트워크','내부 도구']
+  }
+];
+
+const grid = document.getElementById('projectGrid');
+PROJECTS.forEach(p=>{
+  const card = document.createElement('div');
+  card.className = 'card-hover bg-ink border border-transparent p-8 cursor-pointer flex flex-col gap-6 min-h-[260px]';
+  card.tabIndex = 0;
+  card.setAttribute('role','button');
+  card.onclick = ()=>openProject(p.id);
+  card.onkeydown = (e)=>{ if(e.key==='Enter') openProject(p.id); };
+  card.innerHTML = `
+    <div class="flex items-center justify-between">
+      <i class="fa-solid ${p.icon} text-blue text-xl"></i>
+      <span class="font-mono text-[11px] text-mute">${p.score}</span>
+    </div>
+    <div>
+      <h3 class="font-display text-2xl mb-2">${p.title}</h3>
+      <p class="text-sm text-mute">${p.client} · ${p.sub}</p>
+    </div>
+    <div class="mt-auto flex items-center justify-between font-mono text-[11px] text-mute uppercase tracking-widest pt-4 border-t border-line">
+      <span>${p.metricLabel}</span>
+      <span class="text-paper">${p.metricBefore} → <span class="text-blue">${p.metricAfter}</span></span>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+function openProject(id){
+  const p = PROJECTS.find(x=>x.id===id);
+  if(!p) return;
+  document.getElementById('detailContent').innerHTML = `
+    <div class="max-w-7xl mx-auto px-6 md:px-10 pt-8 pb-16 border-b border-line">
+      <div class="font-mono text-xs text-blue uppercase tracking-widest mb-6">${p.score}</div>
+      <h1 class="font-display text-4xl md:text-6xl mb-6 max-w-3xl">${p.title}</h1>
+      <p class="text-lg text-mute max-w-2xl mb-10">${p.overview}</p>
+      <div class="flex flex-wrap gap-2 mb-10">
+        ${p.tags.map(t=>`<span class="font-mono text-[11px] uppercase tracking-widest border border-line rounded-full px-3 py-1.5 text-mute">${t}</span>`).join('')}
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-line border border-line">
+        <div class="bg-ink p-5"><div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">Client</div><div class="text-sm">${p.client}</div></div>
+        <div class="bg-ink p-5"><div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">Role</div><div class="text-sm">${p.role}</div></div>
+        <div class="bg-ink p-5"><div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">Duration</div><div class="text-sm">${p.duration}</div></div>
+        <div class="bg-ink p-5"><div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">Year</div><div class="text-sm">${p.year}</div></div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-16 border-b border-line">
+      <div class="flex items-center gap-3 mb-8">
+        <i class="fa-solid fa-circle-exclamation text-amber"></i>
+        <h2 class="font-display text-2xl">Problem</h2>
+      </div>
+      <p class="text-mute text-lg leading-relaxed max-w-3xl">${p.problem}</p>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-16 border-b border-line">
+      <div class="flex items-center gap-3 mb-10">
+        <i class="fa-solid fa-magnifying-glass-chart text-blue"></i>
+        <h2 class="font-display text-2xl">Discover &amp; Define</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-px bg-line border border-line">
+        ${p.research.map(r=>`
+          <div class="bg-ink p-6">
+            <div class="font-mono text-[11px] text-blue uppercase tracking-widest mb-3">${r.label}</div>
+            <p class="text-sm text-mute leading-relaxed">${r.detail}</p>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-16 border-b border-line">
+      <div class="flex items-center gap-3 mb-8">
+        <i class="fa-solid fa-diagram-project text-blue"></i>
+        <h2 class="font-display text-2xl">Structure &amp; Flow</h2>
+      </div>
+      <p class="text-mute text-lg leading-relaxed max-w-3xl mb-10">${p.structure}</p>
+      <div class="flex flex-wrap items-center gap-0">
+        ${p.flow.map((step,i)=>`
+          <div class="flex items-center">
+            <div class="font-mono text-xs border border-line rounded-full px-4 py-2.5 bg-surface whitespace-nowrap">${step}</div>
+            ${i < p.flow.length-1 ? '<i class="fa-solid fa-arrow-right text-mute mx-3"></i>' : ''}
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-16 border-b border-line">
+      <div class="flex items-center gap-3 mb-8">
+        <i class="fa-solid fa-flask text-blue"></i>
+        <h2 class="font-display text-2xl">Validate</h2>
+      </div>
+      <p class="text-mute text-lg leading-relaxed max-w-3xl">${p.validate}</p>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-16 border-b border-line">
+      <div class="flex items-center gap-3 mb-10">
+        <i class="fa-solid fa-chart-line text-blue"></i>
+        <h2 class="font-display text-2xl">Outcome</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <p class="text-mute text-lg leading-relaxed">${p.outcome}</p>
+        <div class="flex items-center justify-between border border-line p-8">
+          <div class="text-center">
+            <div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">Before</div>
+            <div class="font-display text-3xl text-mute">${p.metricBefore}</div>
+          </div>
+          <i class="fa-solid fa-arrow-right-long text-blue text-2xl"></i>
+          <div class="text-center">
+            <div class="font-mono text-[11px] text-mute uppercase tracking-widest mb-2">After</div>
+            <div class="font-display text-3xl text-blue">${p.metricAfter}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-16">
+      <button onclick="showView('home','work')" class="font-mono text-xs uppercase tracking-widest border border-line rounded-full px-6 py-3 hover:border-blue hover:text-blue transition flex items-center gap-2">
+        <i class="fa-solid fa-arrow-left"></i> 모든 케이스 스터디 보기
+      </button>
+    </div>
+  `;
+  showView('detail');
+  window.scrollTo({top:0, behavior:'instant'});
+}
+
+function showView(name, anchorId){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  if(anchorId){
+    requestAnimationFrame(()=>{
+      const el = document.getElementById(anchorId);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  } else {
+    window.scrollTo({top:0, behavior:'instant'});
+  }
+}
+</script>
+
+</body>
+</html>
